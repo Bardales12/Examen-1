@@ -1,0 +1,55 @@
+@startuml
+
+class models.Usuarios{ 
+    + id: int
+    --
+    name: string
+    email: string
+    password: string
+}
+class models.Libro {
+    + id: int
+    --
+    title: string
+    author_id: int
+    category_id: int
+}
+
+class models.Reseña {
+    + id: int
+    --
+    user_id: int
+    book_id: int
+    rating: int
+    comment: text
+}
+
+class models.Autores {
+    + id: int
+    --
+    name: string
+    bio: text
+}
+
+class models.Categorias  {
+    + id: int
+    --
+    name: string
+}
+
+class models.Reserva {
+    + id: int
+    --
+    user_id: int
+    book_id: int
+}
+
+Usuarios "1" --> "*" Reserva : Tiene
+Usuarios "1" --> "*" Reseña : Tiene
+Libro "1" --> "*" Reseña : Tiene
+Libro "1" --> "0..1" Autores : Tiene
+Libro "1" --> "0..1" Categorias : Tiene
+Autores "1" --> "*" Libro : Tiene
+Categorias "1" --> "*" Libro : Tiene
+
+@enduml
